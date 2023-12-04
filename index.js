@@ -1,7 +1,7 @@
 #!/usr/bin/env babel-node
 
 import Promise from 'bluebird';
-import { spawn, execSync } from 'child_process';
+import { execSync, spawn } from 'child_process';
 import Github from 'github';
 import R from 'ramda';
 
@@ -98,7 +98,7 @@ request(download_options)
   .then(() => {
     console.log('Taring archive');
     process.chdir('./dockerized-phantomjs');
-    return execSync('tar -zcf ../dockerized-phantomjs.tar.gz ./lib ./lib64 ./usr/lib');
+    return execSync('tar -zcf ../dockerized-phantomjs.tar.gz ./*');
   })
   .then(() => {
     if (process.env.GITHUB_TOKEN) return releaseToGithub();
